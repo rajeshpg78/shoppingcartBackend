@@ -1,31 +1,23 @@
 package com.niit.shoppingcart.model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-import org.hibernate.annotations.Table;
 import org.springframework.stereotype.Component;
-@Entity
+import org.springframework.stereotype.Controller;
 
+@Entity
+@Table(name="UserDetails")
 @Component
-public class User {
+public class UserDetails {
 	@Id
 	private String id;
 	private String password;
 	private String name;
 	private String email;
 	private String mobile;
-	private String address;
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
 
 	@Column
 	private byte admin;
@@ -78,4 +70,4 @@ public class User {
 		this.mobile = mobile;
 	}
 
-	}
+}

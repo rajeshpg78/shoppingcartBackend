@@ -21,7 +21,7 @@ public class UserTest {
 		System.out.println(user.toString());
 		user.setId("A343443411");
 		user.setName("john");
-		user.setAddress("krishnanpalya bangalore");
+		
 
 		try {
 			userDAO.saveOrUpdate(user);

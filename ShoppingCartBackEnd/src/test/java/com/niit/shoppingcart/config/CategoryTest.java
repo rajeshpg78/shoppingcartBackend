@@ -10,10 +10,9 @@ public class CategoryTest {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 		context.scan("com.niit.shoppingcart");
-		System.out.println("scan package");
+		//System.out.println("scan package");
 		context.refresh();
-		CategoryDAO categoryDAO = (CategoryDAO) context.getBean("categoryDAO");
-		System.out.println("I m here***");
+		/*System.out.println("I m here***");
 
 		Category category = (Category) context.getBean("category");
 		System.out.println(category.toString());
@@ -31,6 +30,12 @@ public class CategoryTest {
 		}
 		
 		}
+		*/
+		
+		CategoryDAO categoryDAO = (CategoryDAO) context.getBean("categoryDAO");
+		System.out.println("categoryDAO bean loaded***");
+		
 	}
+}
 
 

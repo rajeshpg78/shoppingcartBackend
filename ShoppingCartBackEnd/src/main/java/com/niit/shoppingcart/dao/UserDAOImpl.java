@@ -23,15 +23,15 @@ public class UserDAOImpl implements UserDAO {
 	@Transactional
 	public List<User> list() {
 		@SuppressWarnings("unchecked")
-		List<User> listUser = (List<User>) sessionFactory.getCurrentSession()
-				.createCriteria("user.class").setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		List<User> listUser = (List<User>) sessionFactory.getCurrentSession().createCriteria(User.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		return listUser;
 
 	}
 
 	@Transactional
 	public User get(String id) {
-		String hql = "from User where id=" + "'" + "'";
+		String hql = "from User where id=" + "'" + id + "'";
 		Query query = (Query) sessionFactory.getCurrentSession().createQuery(hql);
 		List<User> listUser = (List<User>) query.list();
 
@@ -53,6 +53,16 @@ public class UserDAOImpl implements UserDAO {
 	public void delete(String id) {
 		sessionFactory.getCurrentSession().delete(id);
 
+	}
+	@Transactional
+	public boolean isValidUser(String id, String password) {
+		String hql = "from User where id='"+id+"' and "+" password='"+password+"'";
+		Query q = sessionFactory.getCurrentSession().createQuery(hql);
+		List list = q.list();
+		if (list == null || list.isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 }

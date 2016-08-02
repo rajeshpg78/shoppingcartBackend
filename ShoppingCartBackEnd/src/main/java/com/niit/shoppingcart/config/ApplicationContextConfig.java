@@ -16,10 +16,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.shoppingcart.dao.CategoryDAO;
 import com.niit.shoppingcart.dao.CategoryDAOImpl;
+import com.niit.shoppingcart.model.Cart;
 import com.niit.shoppingcart.model.Category;
 import com.niit.shoppingcart.model.Product;
 import com.niit.shoppingcart.model.Supplier;
 import com.niit.shoppingcart.model.User;
+import com.niit.shoppingcart.model.UserDetails;
 
 @Configuration
 @ComponentScan("com.niit.shoppingcart")
@@ -41,7 +43,7 @@ public class ApplicationContextConfig {
 		Properties properties = new Properties();
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-		properties.put("hibernate.hbm2ddl.auto", "create");
+		properties.put("hibernate.hbm2ddl.auto", "update");
 		return properties;
 	}
 
@@ -50,12 +52,15 @@ public class ApplicationContextConfig {
 	public SessionFactory getSessionFactory(DataSource dataSource) {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 		sessionBuilder.addProperties(getHibernateProperties());
-		//sessionBuilder.addAnnotatedClass(Category.class);
-		//sessionBuilder.addAnnotatedClass(Supplier.class);
-		//sessionBuilder.addAnnotatedClass(Product.class);
+		sessionBuilder.addAnnotatedClass(Category.class);
+		sessionBuilder.addAnnotatedClass(Supplier.class);
+		sessionBuilder.addAnnotatedClass(Product.class);
 		sessionBuilder.addAnnotatedClass(User.class);
+		sessionBuilder.addAnnotatedClass(UserDetails.class);
+		sessionBuilder.addAnnotatedClass(Cart.class);
 		return sessionBuilder.buildSessionFactory();
 	}
+
 	@Autowired
 	@Bean(name = "transactionManager")
 	public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
@@ -64,15 +69,12 @@ public class ApplicationContextConfig {
 
 	}
 
+	@Autowired
+	@Bean(name = "categoryDAO")
+	public CategoryDAO getCategoryDAO(SessionFactory sessionFactory) {
 
-	  @Autowired 
-	  @Bean(name = "categoryDAO") 
-	 public CategoryDAO  getCategoryDAO(SessionFactory sessionFactory) {
-	 
-	  return new CategoryDAOImpl(sessionFactory);
-	  
-	 }
-	
-	 
+		return new CategoryDAOImpl(sessionFactory);
+
+	}
 
 }

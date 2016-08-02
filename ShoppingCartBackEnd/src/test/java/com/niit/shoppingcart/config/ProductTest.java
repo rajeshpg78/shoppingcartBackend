@@ -18,7 +18,7 @@ public class ProductTest {
 		System.out.println("I am here***");
 
 		Product product = (Product) context.getBean("product");
-		System.out.println(product.toString());
+		//System.out.println(product.toString());
 		product.setId("hd01");
 		product.setName("sony");
 		product.setPrice("10000");
@@ -31,10 +31,12 @@ public class ProductTest {
 			//e.printStackTrace();
 			System.out.println("gt exception");
 		}
+		/*
 		if (productDAO.get("sdf") == null) {
 			System.out.println("product does not exists");
 		} else {
 			System.out.println("product exists");
 		}
+		*/
 	}
 }

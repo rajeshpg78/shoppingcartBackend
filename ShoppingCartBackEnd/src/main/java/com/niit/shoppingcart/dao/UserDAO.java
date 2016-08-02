@@ -12,4 +12,5 @@ public interface UserDAO {
 	public void saveOrUpdate(User User);
 
 	public void delete(String id);
+	public boolean isValidUser(String id,String name);
 }

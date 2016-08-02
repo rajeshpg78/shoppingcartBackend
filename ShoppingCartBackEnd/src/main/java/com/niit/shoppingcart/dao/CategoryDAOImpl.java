@@ -24,7 +24,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	public List<Category> list() {
 		@SuppressWarnings("unchecked")
 		List<Category> listCategory = (List<Category>) sessionFactory.getCurrentSession()
-				.createCriteria("category.class").setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+				.createCriteria(Category.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		return listCategory;
 
 	}
